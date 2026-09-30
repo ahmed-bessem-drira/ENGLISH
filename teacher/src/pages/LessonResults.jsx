@@ -302,7 +302,7 @@ const LessonResults = () => {
       </div>
 
       {/* Modern Analytics Stat Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
         {/* Total Participants */}
         <div className="relative overflow-hidden bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm hover:shadow-lg hover:border-blue-300 transition-all duration-200 group">
           <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-blue-500/10 via-transparent to-transparent rounded-bl-full pointer-events-none group-hover:scale-110 transition-transform" />
@@ -322,7 +322,7 @@ const LessonResults = () => {
           </div>
           <p className="text-[11px] text-slate-400 mt-2 flex items-center gap-1.5 font-medium">
             <span>👥</span>
-            <span>Joined via class PIN</span>
+            <span>Joined this lesson</span>
           </p>
         </div>
 
@@ -349,30 +349,6 @@ const LessonResults = () => {
           </p>
         </div>
 
-        {/* Live Status / Access Code */}
-        <div className="relative overflow-hidden bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm hover:shadow-lg hover:border-purple-300 transition-all duration-200 group">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-purple-500/10 via-transparent to-transparent rounded-bl-full pointer-events-none group-hover:scale-110 transition-transform" />
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-[11px] font-extrabold text-slate-500 uppercase tracking-wider">Lesson Access PIN</span>
-            <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shadow-xs group-hover:scale-110 group-hover:bg-purple-600 group-hover:text-white transition-all">
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
-              </svg>
-            </div>
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="text-2xl sm:text-3xl font-mono font-black text-purple-600 tracking-wider">
-              {lesson?.accessCode || '—'}
-            </span>
-            <span className="text-[10px] font-bold text-purple-600 bg-purple-50 border border-purple-200/60 px-2 py-0.5 rounded-full">
-              6-Digit Code
-            </span>
-          </div>
-          <p className="text-[11px] text-slate-400 mt-2 flex items-center gap-1.5 font-medium">
-            <span>🔑</span>
-            <span>Share with students to join</span>
-          </p>
-        </div>
       </div>
 
       {/* Main Student Results Table Card */}
@@ -402,13 +378,9 @@ const LessonResults = () => {
               📊
             </div>
             <h3 className="text-base font-bold text-slate-900 mb-1.5">No student submissions yet</h3>
-            <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto mb-6 leading-relaxed">
-              When students enter the 6-character access code and complete this English lesson, their scores, answers, and written responses will show up here instantly.
+            <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto leading-relaxed">
+              When students complete this English lesson, their scores, answers, and written responses will show up here instantly.
             </p>
-            <div className="inline-flex items-center gap-2 bg-slate-50 border border-slate-200 px-4 py-2 rounded-xl text-xs font-semibold text-slate-700">
-              <span>🔑 Lesson PIN:</span>
-              <span className="font-mono font-bold text-blue-600">{lesson?.accessCode || '—'}</span>
-            </div>
           </div>
         ) : (
           <div className="overflow-x-auto">

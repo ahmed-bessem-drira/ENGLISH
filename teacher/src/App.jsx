@@ -11,6 +11,7 @@ import CreateLesson from './pages/CreateLesson';
 import LessonBuilder from './pages/LessonBuilder';
 import LessonResults from './pages/LessonResults';
 import StudentResults from './pages/StudentResults';
+import CodeQr from './pages/CodeQr';
 import MainLayout from './layouts/MainLayout';
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
             <Route path="lessons/:id/builder" element={<LessonBuilder />} />
             <Route path="lessons/:id/results" element={<LessonResults />} />
             <Route path="lessons/:id/results/:studentId" element={<StudentResults />} />
+            <Route path="codeqr" element={<CodeQr />} />
           </Route>
           <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>

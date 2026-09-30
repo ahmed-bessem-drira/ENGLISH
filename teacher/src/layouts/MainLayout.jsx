@@ -51,6 +51,15 @@ const MainLayout = () => {
         </svg>
       ),
     },
+    {
+      path: '/codeqr',
+      label: 'Student QR Code',
+      icon: (
+        <svg className="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h6v6H3zM15 3h6v6h-6zM3 15h6v6H3zM15 15h3v3h-3zM21 15v.01M15 21v.01M21 21v.01M18 18h3v3h-3z" />
+        </svg>
+      ),
+    },
   ];
 
   const teacherName = user?.name || 'Drira Ahmed Bessem';

@@ -10,6 +10,8 @@ const ClassDetails = () => {
   const [allLessons, setAllLessons] = useState([]);
   const [loading, setLoading] = useState(true);
   const [attachId, setAttachId] = useState('');
+  const [showCodeLesson, setShowCodeLesson] = useState(null);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     loadData();
@@ -44,8 +46,15 @@ const ClassDetails = () => {
   };
 
   const handleCopyCode = (code) => {
+    if (!code) return;
     navigator.clipboard.writeText(code);
-    alert('Code copied: ' + code);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const openCodePopup = (lesson) => {
+    setCopied(false);
+    setShowCodeLesson(lesson);
   };
 
   const handleRegenerateCode = async (lessonId) => {
@@ -173,10 +182,10 @@ const ClassDetails = () => {
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
                   <button
-                    onClick={() => handleCopyCode(lesson.classCode)}
+                    onClick={() => openCodePopup(lesson)}
                     className="px-2.5 py-1.5 rounded-md border border-slate-200 text-slate-700 hover:bg-slate-50 text-xs font-semibold transition-colors"
                   >
-                    Copy code
+                    Show code
                   </button>
                   <button
                     onClick={() => handleRegenerateCode(lesson._id)}
@@ -208,6 +217,59 @@ const ClassDetails = () => {
           </div>
         )}
       </div>
+
+      {showCodeLesson && (
+        <div
+          className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50"
+          onClick={() => setShowCodeLesson(null)}
+        >
+          <div
+            className="bg-white rounded-xl shadow-2xl max-w-md w-full px-10 py-10 text-center relative border border-slate-100"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setShowCodeLesson(null)}
+              className="absolute top-4 right-5 text-slate-300 hover:text-slate-600 text-lg leading-none transition-colors"
+              aria-label="Close"
+            >
+              ×
+            </button>
+            <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-[0.25em] mb-3">
+              Class code
+            </p>
+            <h2 className="text-xl font-semibold text-slate-900 tracking-tight">
+              {showCodeLesson.title}
+            </h2>
+            <p className="text-[13px] text-slate-500 mt-1 mb-8">
+              {classData?.name}
+            </p>
+            <div className="border-t border-b border-slate-100 py-8 mb-6">
+              <span className="font-mono font-medium text-5xl text-slate-900 tracking-[0.3em] tabular-nums">
+                {showCodeLesson.classCode || '...'}
+              </span>
+            </div>
+            <p className="text-xs text-slate-400 mb-8 leading-relaxed">
+              Share this code with your students.
+              <br />
+              They will be tagged with class {classData?.name}.
+            </p>
+            <div className="flex gap-3 justify-center">
+              <button
+                onClick={() => handleCopyCode(showCodeLesson.classCode)}
+                className="px-8 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-[13px] font-medium transition-colors"
+              >
+                {copied ? 'Copied' : 'Copy code'}
+              </button>
+              <button
+                onClick={() => setShowCodeLesson(null)}
+                className="px-8 py-2.5 border border-slate-200 rounded-lg text-slate-600 hover:bg-slate-50 text-[13px] font-medium transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
